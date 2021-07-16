@@ -17,7 +17,6 @@ namespace Random_slowmo
 
     public class RandomSlowmo : MelonMod
     {
-        private System.Random rand = new System.Random();
         private bool isEnabled = false;
         public override void OnApplicationStart()
         {
@@ -27,13 +26,13 @@ namespace Random_slowmo
         }
         private IEnumerator ChangeTime()
         {
-            yield return new WaitForSeconds(rand.Next(6, 10));
+            yield return new WaitForSecondsRealtime(UnityEngine.Random.RandomRange(6, 10));
 
             var times = new float[] { 0.125f, 0.25f, 0.5f };
             if (isEnabled)
             {
-                Time.timeScale = times[rand.Next(0, times.Length)];
-                yield return new WaitForSeconds(3);
+                Time.timeScale = times[UnityEngine.Random.RandomRange(0, times.Length)];
+                yield return new WaitForSecondsRealtime(3);
                 Time.timeScale = 1;
             }
 
